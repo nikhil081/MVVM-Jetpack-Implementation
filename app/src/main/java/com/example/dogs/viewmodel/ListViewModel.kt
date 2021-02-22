@@ -3,6 +3,7 @@ package com.example.dogs.viewmodel
 import android.app.Application
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
+import com.example.dogs.NotificationHelper
 import com.example.dogs.SharedPreferencesHelper
 import com.example.dogs.model.DogBreed
 import com.example.dogs.model.DogDatabase
@@ -37,6 +38,7 @@ class ListViewModel(application: Application) : BaseViewModel(application) {
             dogsRetrieved(dogsList)
             Toast.makeText(getApplication(), "Dogs retreived from database", Toast.LENGTH_SHORT)
                 .show()
+            NotificationHelper(getApplication()).createNofitication()
         }
     }
 
