@@ -9,11 +9,16 @@
             name="handler"
             type="com.example.dogs.view.DetailFragment" />
 
+        <variable
+            name="palette"
+            type="com.example.dogs.model.DogPalette" />
+
     </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@{palette.color}"
         tools:context=".view.DetailFragment">
 
         <ImageView

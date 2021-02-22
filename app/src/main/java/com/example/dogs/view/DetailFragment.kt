@@ -1,5 +1,7 @@
 package com.example.dogs.view
 
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,9 +9,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.palette.graphics.Palette
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.example.dogs.databinding.FragmentDetailBinding
 import com.example.dogs.getProgressDrawable
 import com.example.dogs.loadImage
+import com.example.dogs.model.DogPalette
 import com.example.dogs.viewmodel.DetailViewModel
 import kotlinx.android.synthetic.main.fragment_detail.*
 
@@ -51,14 +58,33 @@ class DetailFragment : Fragment() {
                 context?.let {
                     dogImage.loadImage(dog.imageUrl, getProgressDrawable(it))
                 }
+                it.imageUrl?.let {
+                    setUpBackGround(it)
+                }
             }
         })
     }
 
+    private fun setUpBackGround(url: String) {
+        Glide.with(this).asBitmap().load(url).into(object : CustomTarget<Bitmap>() {
+            override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                Palette.from(resource).generate { palette ->
+                    val intColor = palette?.vibrantSwatch?.rgb ?: 0
+                    val myPalette = DogPalette(intColor)
+                    binding.palette = myPalette
+                }
+            }
+
+            override fun onLoadCleared(placeholder: Drawable?) {
+
+            }
+
+        })
+
+    }
 
     override fun onResume() {
         super.onResume()
         (activity as MainActivity?)?.setActionBarTitle("Details Fragment")
-
     }
 }
