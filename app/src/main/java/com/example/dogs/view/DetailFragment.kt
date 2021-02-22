@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.dogs.databinding.FragmentDetailBinding
+import com.example.dogs.getProgressDrawable
+import com.example.dogs.loadImage
 import com.example.dogs.viewmodel.DetailViewModel
 import kotlinx.android.synthetic.main.fragment_detail.*
 
@@ -36,7 +38,7 @@ class DetailFragment : Fragment() {
             dogUuid = DetailFragmentArgs.fromBundle(it).dogUuid
         }
         viewModel = ViewModelProviders.of(this).get(DetailViewModel::class.java)
-        viewModel.fetch()
+        viewModel.fetch(dogUuid)
         observeViewModel()
     }
 
@@ -46,7 +48,9 @@ class DetailFragment : Fragment() {
                 dogName.text = dog.dogBreed
                 dogLifeSpan.text = dog.lifeSpan
                 dogTempermant.text = dog.tempermant
-
+                context?.let {
+                    dogImage.loadImage(dog.imageUrl, getProgressDrawable(it))
+                }
             }
         })
     }

@@ -30,23 +30,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/dogImage"
-            android:layout_centerHorizontal="true"
-            android:text="Dog name" />
+            android:layout_centerHorizontal="true" />
 
         <TextView
             android:id="@+id/dogTempermant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/dogName"
-            android:layout_centerHorizontal="true"
-            android:text="Dog Temparment" />
+            android:layout_centerHorizontal="true" />
 
         <TextView
             android:id="@+id/dogLifeSpan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/dogTempermant"
-            android:layout_centerHorizontal="true"
-            android:text="Dog LifeSpan" />
+            android:layout_centerHorizontal="true" />
     </RelativeLayout>
 </layout>
